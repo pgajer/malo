@@ -12,6 +12,7 @@ Description: Legacy one-dimensional non-linear regression and
     model-averaging APIs extracted from gflow, including piecewise-linear,
     local model-averaging, and MAB benchmarking families.
 License: GPL (>= 3)
+SystemRequirements: C++17, GNU make, OpenMP (optional)
 Encoding: UTF-8
 Language: en-US
 Depends:
@@ -31,7 +32,11 @@ Suggests:
     KernSmooth,
     CVST,
     mclust,
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
+VignetteBuilder:
+    knitr
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Config/testthat/edition: 3

@@ -6,5 +6,9 @@
 ^\.claude$
 ^malo\.Rcheck$
 ^malo_.*\.tar\.gz$
+^conftest_omp(\.cpp|\.o|\.exe)?$
+^conftest_omp\.dSYM$
 ^README\.md$
+^INSTALL\.md$
 ^Makefile$
+^src/.*\.(o|so|dll|a)$

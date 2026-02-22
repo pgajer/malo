@@ -1,5 +1,5 @@
-# Generated overrides from configure (profile + sanitizer backend, if any)
--include Makevars.local
+# Generated overrides from configure.win (profile + sanitizer backend, if any)
+-include Makevars.win.local
 MALO_BUILD_PROFILE ?= cran-safe
 MALO_OPENMP_CXXFLAGS ?= $(SHLIB_OPENMP_CXXFLAGS)
 MALO_OPENMP_LIBS ?= $(SHLIB_OPENMP_CXXFLAGS)
@@ -8,20 +8,17 @@ MALO_OPENMP_LIBS ?= $(SHLIB_OPENMP_CXXFLAGS)
 PKG_CPPFLAGS = -I. -IANN
 PKG_CPPFLAGS += -I../inst/include/gflow
 PKG_CPPFLAGS += -I../inst/include -DR_NO_REMAP
-# Only disable parallelization on problematic platforms
-ifeq ($(OS),Windows_NT)
-    PKG_CPPFLAGS += -DEIGEN_DONT_PARALLELIZE
+ifeq ($(MALO_BUILD_PROFILE),cran-safe)
+    PKG_CPPFLAGS += -DEIGEN_DONT_VECTORIZE -DEIGEN_DONT_PARALLELIZE -DMALO_ALLOW_NO_OPENMP
+else ifeq ($(MALO_BUILD_PROFILE),dev)
+    PKG_CPPFLAGS += -DEIGEN_DONT_VECTORIZE
 else
-    ifeq ($(MALO_BUILD_PROFILE),cran-safe)
-        PKG_CPPFLAGS += -DEIGEN_DONT_PARALLELIZE
-    else
-        # Enable Eigen parallelization on Unix-like systems in dev profile
-        PKG_CPPFLAGS += -DEIGEN_USE_OPENMP
-    endif
+    $(warning Unknown MALO_BUILD_PROFILE='$(MALO_BUILD_PROFILE)'; using cran-safe profile)
+    PKG_CPPFLAGS += -DEIGEN_DONT_VECTORIZE -DEIGEN_DONT_PARALLELIZE -DMALO_ALLOW_NO_OPENMP
 endif
 PKG_CPPFLAGS += -D_Alignof=__alignof__
-# Neutralize ANN's DLL decorations (harmless on non-Windows too)
-PKG_CPPFLAGS += -DDLL_API=
+PKG_CPPFLAGS += -DDLL_EXPORTS
+PKG_CPPFLAGS += -DGFLOW_NO_TBB
 
 # Force-include Eigen config before any Eigen headers
 PKG_CPPFLAGS += -include ../inst/include/gflow/eigen_config.hpp
@@ -29,7 +26,6 @@ PKG_CPPFLAGS += -include ../inst/include/gflow/eigen_config.hpp
 # ---- C++ standard / OpenMP
 CXX_STD      = CXX17
 ifeq ($(MALO_BUILD_PROFILE),cran-safe)
-    PKG_CPPFLAGS += -DMALO_ALLOW_NO_OPENMP
     PKG_CXXFLAGS = $(SHLIB_OPENMP_CXXFLAGS)
     PKG_LIBS     = $(SHLIB_OPENMP_CXXFLAGS) $(LAPACK_LIBS) $(BLAS_LIBS) $(FLIBS)
 else ifeq ($(MALO_BUILD_PROFILE),dev)

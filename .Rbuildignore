@@ -1,0 +1,10 @@
+^\.git$
+^\.gitignore$
+^\.github$
+^\.Rproj\.user$
+^.*\.Rproj$
+^\.claude$
+^malo\.Rcheck$
+^malo_.*\.tar\.gz$
+^README\.md$
+^Makefile$

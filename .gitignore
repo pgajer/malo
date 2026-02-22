@@ -1,0 +1,16 @@
+# R package build artifacts
+*.tar.gz
+*.Rcheck/
+.Rcheck/
+
+# Native build artifacts
+src/*.o
+src/*.so
+src/*.dll
+src/RcppExports.cpp
+
+# Logs / local tooling
+.claude/
+
+# OS/editor artifacts
+.DS_Store

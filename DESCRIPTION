@@ -1,0 +1,37 @@
+Package: malo
+Title: Legacy One-Dimensional Model-Averaged Local Regression Tools
+Version: 0.0.1
+Authors@R:
+    person(given = "Pawel",
+           family = "Gajer",
+           email = "pgajer@gmail.com",
+           role = c("aut", "cre"))
+Author: Pawel Gajer [aut, cre]
+Maintainer: Pawel Gajer <pgajer@gmail.com>
+Description: Legacy one-dimensional non-linear regression and
+    model-averaging APIs extracted from gflow, including piecewise-linear,
+    local model-averaging, and MAB benchmarking families.
+License: GPL (>= 3)
+Encoding: UTF-8
+Language: en-US
+Depends:
+    R (>= 3.5.0)
+Imports:
+    FNN,
+    doParallel,
+    foreach
+Suggests:
+    segmented,
+    randomForest,
+    np,
+    mgcv,
+    kernlab,
+    glmnet,
+    e1071,
+    KernSmooth,
+    CVST,
+    mclust,
+    testthat (>= 3.0.0)
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Config/testthat/edition: 3

@@ -1,0 +1,4 @@
+#ifndef EIGEN_CONFIG_HPP
+#define EIGEN_CONFIG_HPP
+
+#endif // EIGEN_CONFIG_HPP
